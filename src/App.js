@@ -1,13 +1,52 @@
+import React, {useEffect} from 'react';
 import './styles/globals.css';
 
 
 function App() {
+
+ useEffect(() => {
+    const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
+    toggleSwitch.addEventListener('change', switchTheme, false);
+
+    if (currentTheme) {
+      document.documentElement.setAttribute('data-theme', currentTheme);
+
+      if (currentTheme === 'dark') {
+          toggleSwitch.checked = true;
+      }
+  }
+
+  },);
+
+  function switchTheme(e) {
+      if (e.target.checked) {
+          document.documentElement.setAttribute('data-theme', 'dark');
+          localStorage.setItem('theme', 'dark'); 
+      }
+      else {
+          document.documentElement.setAttribute('data-theme', 'light');
+          localStorage.setItem('theme', 'light'); 
+      }    
+  }
+
+  const currentTheme = localStorage.getItem('theme') ? localStorage.getItem('theme') : null;
+
+ 
+
+  
   return (
 
       <article className="App">
         <header>
           <h1>devfinder</h1>
-          <h2>Light Dark</h2>
+          <h2>Light </h2>
+          <div className="theme-switch-wrapper">
+            <label className="theme-switch" type="checkbox">
+                <input type="checkbox" id="checkbox" />
+                <div className="slider round"></div>
+          </label>
+        </div>
+          <h2> Dark</h2>
           <img src="/icon-moon.svg" alt="moon" className='img-sun'/>
         </header>
 
@@ -31,7 +70,7 @@ function App() {
           </div>
 
           <div className="profile-body">
-            <h2>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros.</h2>
+            <div>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros.</div>
           </div>
 
           <div className="profile-stats">
@@ -58,7 +97,7 @@ function App() {
             </div>
 
             <div className="website">
-              <img src="icon-website.svg" alt="link image" />
+              <img src="icon-website.svg" alt="website" />
               <h4>https://github.blog</h4>
             </div>
 
