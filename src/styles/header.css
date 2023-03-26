@@ -9,18 +9,24 @@
     flex-direction: row;
 }
 
-.theme-name {
-    text-transform: uppercase;
-    color: var(--font-primary);
+.theme-label {
+    display: flex;
+    
 }
 
-.theme-switch {
-    width: 1.25rem;
+.theme-checkbox {
     height: 1.25rem;
+    width: 1.25rem;
     margin-left: 1rem;
+    appearance: none;
+    background: url("./../../public/icon-moon.svg") no-repeat;
 }
-#checkbox {
-    display: none;
+
+.theme-checkbox:checked {
+    background: url("./../../public/icon-sun.svg") no-repeat;
 }
+
+
+
 
 

@@ -8,13 +8,15 @@ import './styles/profile.css';
 function App() {
 
  useEffect(() => {
-    const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
+    const toggleSwitch = document.querySelector('.theme-label input[type="checkbox"]');
+    var storedTheme = localStorage.getItem('theme') || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+
     toggleSwitch.addEventListener('change', switchTheme, false);
 
-    if (currentTheme) {
-      document.documentElement.setAttribute('data-theme', currentTheme);
+    if (storedTheme) {
+      document.documentElement.setAttribute('data-theme', storedTheme);
 
-      if (currentTheme === 'dark') {
+      if (storedTheme === 'dark') {
           toggleSwitch.checked = true;
       }
   }
@@ -32,7 +34,7 @@ function App() {
       }    
   }
 
-  const currentTheme = localStorage.getItem('theme') ? localStorage.getItem('theme') : null;
+  
 
  
 
@@ -43,19 +45,12 @@ function App() {
         <div className="main-container">
         <header className='header'>
           <h1>devfinder</h1>
-          {/* <h2>Light </h2> */}
+  
           <div className="theme-container">
-          <div className='theme-name'> Dark</div>
-          <div className="theme-switch-wrapper">
-            <label className="theme-switch" type="checkbox">
-                <input type="checkbox" id="checkbox" />
-                <label for="checkbox"><img src="icon-moon.svg" /></label>
-                <div className="slider round"></div>
-          </label>
-          </div>
+          
+          <label htmlFor="themeId" className="theme-label">label text<input type="checkbox" className="theme-checkbox" id="themeId"/></label>
         </div>
           
-          {/* <img src="/icon-moon.svg" alt="moon" className='theme-img'/> */}
         </header>
 
         <section className="search-bar">
