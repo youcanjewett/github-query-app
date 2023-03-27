@@ -16,6 +16,7 @@
      --font-primary: #FFFFFF;
      --font-secondary: #FFFFFF;
      --hover-color: #90A4D4;
+     --box-shadow: transparent;
 }
 
 * {
@@ -41,6 +42,10 @@ body {
 
 .main-container {
     margin: 2rem 1.5rem;
+}
+
+body {
+    font-size: 0.9375rem;
 }
 
 h1 {
@@ -69,4 +74,23 @@ h4 {
     font-weight: 400;
     font-size: 0.6875rem;
     line-height: 1.25rem;
+}
+
+/* tablet styles */
+@media only screen and (min-width: 768px) {
+    .main-container {
+        margin: 8.75rem 6.125rem;
+    }
+
+    h2 {
+        font-size: 1.625rem;
+    }
+
+    h3 {
+        font-size: 1rem;
+    }
+
+    h4 {
+        font-size: 0.8125rem;
+    }
 }

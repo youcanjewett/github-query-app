@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import './styles/globals.css';
 import './styles/header.css';
 import './styles/search.css';
@@ -6,6 +6,8 @@ import './styles/profile.css';
 
 
 function App() {
+
+  const [altTheme, setAltTheme] = useState('dark');
 
  useEffect(() => {
     const toggleSwitch = document.querySelector('.theme-label input[type="checkbox"]');
@@ -15,22 +17,26 @@ function App() {
 
     if (storedTheme) {
       document.documentElement.setAttribute('data-theme', storedTheme);
+      setAltTheme(storedTheme === 'light' ? "dark" : "light");
 
       if (storedTheme === 'dark') {
           toggleSwitch.checked = true;
-      }
+          
+      } 
   }
 
-  },);
+  },[]);
 
   function switchTheme(e) {
       if (e.target.checked) {
           document.documentElement.setAttribute('data-theme', 'dark');
           localStorage.setItem('theme', 'dark'); 
+          setAltTheme("light");
       }
       else {
           document.documentElement.setAttribute('data-theme', 'light');
           localStorage.setItem('theme', 'light'); 
+          setAltTheme("dark");
       }    
   }
 
@@ -46,9 +52,11 @@ function App() {
         <header className='header'>
           <h1>devfinder</h1>
   
-          <div className="theme-container">
-          
-          <label htmlFor="themeId" className="theme-label">label text<input type="checkbox" className="theme-checkbox" id="themeId"/></label>
+        <div className="theme-container">
+          <label htmlFor="themeId" className="theme-label">
+            <p>{altTheme === 'light' ? 'LIGHT' : 'DARK'}</p> 
+            <input type="checkbox" className="theme-checkbox" id="themeId"/>
+          </label>
         </div>
           
         </header>
@@ -93,22 +101,31 @@ function App() {
 
           <div className="profile-socials">
             <div className="social">
-              <img src="icon-location.svg" className="social-img" alt="map icon" />
+             <div className="img-container">
+              <img src="icon-location.svg" className="social-img map" alt="map icon" />
+              </div>
               <h4>San Francisco</h4>
             </div>
 
+            {/* add actual link */}
             <div className="social">
-              <img src="icon-website.svg" className="social-img" alt="website" />
-              <h4>https://github.blog</h4>
+              <div className="img-container">
+              <img src="icon-website.svg" className="social-img website" alt="website" />
+              </div>
+              <a href="#">https://github.blog</a>
             </div>
 
             <div className="social">
-              <img src="icon-twitter.svg" className="social-img" alt="twitter logo" />
+              <div className="img-container">
+              <img src="icon-twitter.svg" className="social-img twitter" alt="twitter logo" />
+              </div>
               <h4>Not Available</h4>
             </div>
 
             <div className="social">
-              <img src="icon-company.svg" className="social-img" alt="company icon" />
+              <div className="img-container">
+              <img src="icon-company.svg" className="social-img company" alt="company icon" />
+              </div>
               <h4>@github</h4>
             </div>
           </div>

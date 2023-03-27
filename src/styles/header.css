@@ -1,17 +1,22 @@
 .header {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 1.25rem;
+    align-items: center;
+    margin-bottom: 2.25rem;
 }
 
 .theme-container {
     display: flex;
-    flex-direction: row;
+    flex-direction: row;     
 }
 
+
 .theme-label {
-    display: flex;
-    
+    display: flex; 
+}
+
+.theme-label, .theme-checkbox {
+    cursor: pointer;
 }
 
 .theme-checkbox {
@@ -26,6 +31,13 @@
     background: url("./../../public/icon-sun.svg") no-repeat;
 }
 
+/* tablet styles */
+@media only screen and (min-width: 768px) {
+
+    .header {
+        margin-bottom: 2rem;
+    }
+}
 
 
 

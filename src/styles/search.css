@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: row;
     background-color: var(--article-bg-color);
-    padding: .5rem;
+    padding: .5rem 0.4375rem .5rem 1rem;
     border-radius: 1rem;
     margin: 1rem 0;
     box-shadow: 0 .5rem .5rem 0 var(--box-shadow);
@@ -24,10 +24,39 @@ input[type=text]{
 }
 
 input[type=submit] {
+    height: 2.875rem;
+    width: 5.25rem;
     margin-left: auto;
     background-color: var(--btn-color);
     color: var(--btn-font);
     padding: 0.78125rem 0.875rem;
     border-radius: 1rem;
     border: none;
+    cursor: pointer;
 }
+
+
+/* tablet styles */
+@media only screen and (min-width: 768px) {
+
+    .search-bar {
+        padding: 0.6rem 0.625rem 0.6rem 2rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .search-icon {
+        height: 1.5rem;
+        width: 1.5rem;
+        margin-right: 1.4rem;
+    }
+
+    input[type=text] {
+        font-size: 1.125rem;
+    }
+
+    input[type=submit] {
+        height: 3.125rem;
+        width: 8rem;
+    }
+}
+
