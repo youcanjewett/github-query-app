@@ -11,6 +11,8 @@ function App() {
   const [altTheme, setAltTheme] = useState('dark');
   const [userData, setUserData] = useState({});
 
+
+
  useEffect(() => {
     const toggleSwitch = document.querySelector('.theme-label input[type="checkbox"]');
     var storedTheme = localStorage.getItem('theme') || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
@@ -27,6 +29,13 @@ function App() {
       } 
   }
 
+  const textInput = document.getElementById("userInput");
+  textInput.addEventListener("keypress", (event) => {
+    if(event.key === 'Enter') {
+      document.getElementById("submitbtn").click();
+    }
+  })
+
   },[userData]);
 
   function switchTheme(e) {
@@ -42,18 +51,26 @@ function App() {
       }    
   }
 
+  const convertDate = (isoDate) => {
+    const dateJoined = new Date(isoDate).toString().slice(4,15);
+
+    return dateJoined;
+  }
+
   const submitHandler = async() => {
     let input = document.getElementById("userInput").value;
-    
-    
+    let errormsg = document.getElementById("errormsg");
+
     try {
       const results = await axios(`https://api.github.com/users/${input}`)
-      console.log(results.data);
+      if (errormsg.style.display === "flex") {
+        errormsg.style.display = "none";
+      }
       setUserData({
         "avatar": results.data.avatar_url,
         "name": results.data.name,
         "tag": '@'.concat(results.data.login),
-        "joined": results.data.created_at,
+        "joined": convertDate(results.data.created_at),
         "bio": results.data.bio,
         "repos": results.data.public_repos,
         "followers": results.data.followers,
@@ -65,6 +82,8 @@ function App() {
       })
     } catch (error) {
       console.log(error);
+      errormsg.style.display = "flex";
+
     }
     
   }
@@ -90,7 +109,8 @@ function App() {
         <section className="search-bar">
           <img src="icon-search.svg" className="search-icon" alt="search" />
           <input type="text" id="userInput" placeholder="Search GitHub username..."/>
-          <input type="submit" value="Search" onClick={submitHandler}/>
+          <div className="error-msg" id="errormsg">No results</div>
+          <input type="submit" id="submitbtn" value="Search" onClick={submitHandler}/>
         </section>
 
         <section className="profile">
@@ -100,7 +120,7 @@ function App() {
             <div className="profile-details">
               <h2>{userData.name || "The Octocat" }</h2>
               <h3 className='tag'>{userData.tag || "@octocat"}</h3>
-              <div>{"Joined "+ userData.joined || "25 Jan 2011"}</div>
+              <div>{"Joined "+ (userData.joined || "25 Jan 2011")}</div>
             </div>
           </div>
 

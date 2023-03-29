@@ -8,6 +8,13 @@
     box-shadow: 0 .5rem .5rem 0 var(--box-shadow);
 }
 
+.error-msg {
+    display: none;
+    color: red;
+    white-space: nowrap;
+    align-items: center;
+}
+
 .search-icon {
     align-self: center;
     margin-right: .5rem;
@@ -18,6 +25,7 @@
 input[type=text]{
    border: 0;
    width: 100%;
+   margin-right: auto;
    background-color: transparent;
    color: var(--font-primary);
    outline: none;
@@ -26,7 +34,8 @@ input[type=text]{
 input[type=submit] {
     height: 2.875rem;
     width: 5.25rem;
-    margin-left: auto;
+    margin-left: 1.5rem;
+    flex-shrink: 0;
     background-color: var(--btn-color);
     color: var(--btn-font);
     padding: 0.78125rem 0.875rem;
